@@ -1,5 +1,6 @@
 // import { StatusOnlineIcon } from "@heroicons/react/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios"
 import "../../css/TableDataContent.css";
 
 import {
@@ -16,10 +17,57 @@ import {
 
 const RequestTable = () => {
   const [requestStatus, setRequestStatus] = useState(false);
+  const[data,setData]=useState([])
 
-  const handleStatusButton = () => {
-    setRequestStatus(!requestStatus);
-  };
+ 
+
+  useEffect(()=>{
+const getAllRequest=async()=>{
+  try {
+    const res= await axios.get("https://hackathon-waste-api.onrender.com/api/v1/waste-request/all",{
+      headers:{
+           token:"Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+      }
+    })
+
+    setData(res.data)
+  } catch (error) {
+   console.log(error)
+  }
+}
+getAllRequest()
+  },[])
+
+
+ 
+    const handleDelete = async(id)=>{
+      try {
+        await axios.delete(`https://hackathon-waste-api.onrender.com/api/v1/waste-request/delete/${id}`,{
+          headers:{
+            token:"Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+       }
+        })
+        setData(data.filter((item) => item._id !== id));
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    
+    const handleStatus = async(id) => {
+      try {
+        await axios.put(`https://hackathon-waste-api.onrender.com/api/v1/waste-request/verify/${id}`,{
+          headers:{
+            token:"Bearer " + JSON.parse(localStorage.getItem("user")).accessToken,
+       }
+        })
+        setData(data.filter((item) => item._id !== id));
+      } catch (error) {
+        console.log(error)
+      }
+    };
+  
+  
 
   return (
     <Card className="card">
@@ -44,14 +92,17 @@ const RequestTable = () => {
           </TableRow>
         </TableHead>
         <TableBody>
+        {
+              data.map((item)=>(
+                <>
           <TableRow className="table_body">
             <TableCell>
-              <button
+              <button 
                 className="status_btn"
                 style={{ backgroundColor: requestStatus ? "" : "red" }}
-                onClick={handleStatusButton}
+                onClick={()=>handleStatus(item._id)}
               >
-                {requestStatus ? "Granted" : "Pending"}
+              {item.status}
               </button>
             </TableCell>
             <TableCell>
@@ -65,6 +116,7 @@ const RequestTable = () => {
                 strokeWidth={1}
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
+                onClick={()=>handleDelete(item._id)}
               >
                 <path d="m5.25 5.25.938 15c.044.867.675 1.5 1.5 1.5h8.625c.828 0 1.447-.633 1.5-1.5l.937-15" />
                 <path d="M3.75 5.25h16.5" />
@@ -74,7 +126,8 @@ const RequestTable = () => {
                 <path d="M15.375 8.25 15 18.75" />
               </svg>
             </TableCell>
-            <TableCell>Sam</TableCell>
+               
+            <TableCell>{item.username}</TableCell>
             <TableCell>
               <Text>example@gmail.com</Text>
             </TableCell>
@@ -82,12 +135,32 @@ const RequestTable = () => {
               <Text>yes</Text>
             </TableCell>
             <TableCell>
-              10/2019<Text>03/0</Text>
+              {item.date}<Text>03/0</Text>
             </TableCell>
             <TableCell>
-              <Text>market</Text>
+              <Text>{item.landmark}</Text>
             </TableCell>
+            <TableCell>
+              <Text>{item.location}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{item.telephone}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{item.numberOfBins}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{item.wastype}</Text>
+            </TableCell>
+            <TableCell>
+              <Text>{item.serviceOption}</Text>
+            </TableCell>
+           
+            
           </TableRow>
+          </>
+          ))
+        }
         </TableBody>
       </Table>
     </Card>

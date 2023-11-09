@@ -1,8 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../../css/Login.css";
 import login_illustrator from "../../../assets/Auth_Image/login_illustrator.svg";
+import { useState } from "react";
+import axios from "axios";
 
 const Login = () => {
+  const [email, setEmail]=useState("")
+  const[password,setPassword]=useState("")
+  const [error, setError]=useState(null)
+  const navigate=useNavigate()
+
+  const handleLogin=async(e)=>{
+    e.preventDefault()
+    try {
+      const res=await axios.post("https://hackathon-waste-api.onrender.com/api/v1/auth/login",{
+        email,
+        password,
+        appType:"app1"
+      })
+      localStorage.setItem("user", JSON.stringify(res.data));
+      console.log(res.data)
+      navigate("/")
+    } catch (error) {
+      setError(error.response.data)
+      console.log(error)
+    }
+  }
   return (
     <div className="login_wrapper">
       <div className="inputs_feild_container">
@@ -14,7 +37,7 @@ const Login = () => {
 
           <p className="divider_or">Or</p>
 
-          <form>
+          <form onSubmit={handleLogin}>
             <fieldset className="form_fieldset">
               <div className="input">
                 <label htmlFor="full_name">Email:</label>
@@ -23,6 +46,7 @@ const Login = () => {
                   name="email"
                   id="email"
                   placeholder="Your Email"
+                  onChange={(e)=>setEmail(e.target.value)}
                 />
               </div>
 
@@ -33,6 +57,7 @@ const Login = () => {
                   name="password"
                   id="password"
                   placeholder="Your Password"
+                  onChange={(e)=>setPassword(e.target.value)}
                 />
               </div>
             </fieldset>
