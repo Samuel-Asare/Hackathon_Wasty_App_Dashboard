@@ -55,7 +55,6 @@ getAllRequest()
 
     
     const handleStatus = async(id) => {
-      console.log(JSON.parse(localStorage.getItem("user")).accessToken,"hdjgshjghsjghsj")
       try {
         await axios.put(`https://hackathon-waste-api.onrender.com/api/v1/waste-request/verify/${id}`,{
           headers:{

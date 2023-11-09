@@ -6,12 +6,13 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./Components/Pages/Auth/Login";
 
 function App() {
+  const user=JSON.parse(localStorage.getItem("user"))
   return (
     <div className="app_wrapper">
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <HeaderNav />
         <Routes>
-          <Route path="/" element={<DashboardExample />} />
+          <Route path="/" element={user?<DashboardExample />:<Login />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </ThemeProvider>
