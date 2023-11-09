@@ -1,0 +1,12 @@
+@import "./utilities";
+
+.card {
+  .data_table {
+    .status_btn {
+      background-color: darken($color: $primary-color, $amount: 40);
+      color: #fff;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.3rem;
+    }
+  }
+}
