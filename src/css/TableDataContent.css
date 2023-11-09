@@ -1,4 +1,21 @@
-.card .data_table .status_btn {
+.table_card {
+  padding: 0 !important;
+}
+.table_card .table_card_header_text {
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
+.table_card .data_table {
+  max-width: 100%;
+  white-space: nowrap;
+}
+.table_card .data_table .table_Head .table_Row {
+  border-bottom: 1px solid #000;
+}
+.table_card .data_table .table_Head .table_Row .table_Cell {
+  font-weight: bold !important;
+}
+.table_card .data_table .status_btn {
   background-color: #1c8d27;
   color: #fff;
   padding: 0.3rem 0.7rem;

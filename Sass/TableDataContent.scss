@@ -1,7 +1,23 @@
 @import "./utilities";
 
-.card {
+.table_card {
+  padding: 0 !important;
+  .table_card_header_text {
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
   .data_table {
+    max-width: 100%;
+    white-space: nowrap;
+
+    .table_Head {
+      .table_Row {
+        border-bottom: 1px solid #000;
+        .table_Cell {
+          font-weight: bold !important;
+        }
+      }
+    }
     .status_btn {
       background-color: darken($color: $primary-color, $amount: 40);
       color: #fff;
