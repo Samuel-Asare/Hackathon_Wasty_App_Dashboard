@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   height: 100vh !important;
-  padding-top: 2.5rem !important;
   width: 100%;
 }
 .login_wrapper .inputs_feild_container {
@@ -29,6 +28,11 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+@media (max-width: 770px) {
+  .login_wrapper .inputs_feild_container .inputs_content {
+    width: 80%;
+  }
 }
 .login_wrapper .inputs_feild_container .inputs_content .btn {
   width: 100%;

@@ -5,27 +5,30 @@ import { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
-  const [email, setEmail]=useState("")
-  const[password,setPassword]=useState("")
-  const [error, setError]=useState(null)
-  const navigate=useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLogin=async(e)=>{
-    e.preventDefault()
+  const handleLogin = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     try {
-      const res=await axios.post("https://hackathon-waste-api.onrender.com/api/v1/auth/login",{
-        email,
-        password,
-        appType:"app1"
-      })
+      const res = await axios.post(
+        "https://hackathon-waste-api.onrender.com/api/v1/auth/login",
+        {
+          email,
+          password,
+          appType: "app1",
+        }
+      );
       localStorage.setItem("user", JSON.stringify(res.data));
-      console.log(res.data)
-      navigate("/")
+      console.log(res.data);
+      navigate("/");
     } catch (error) {
-      setError(error.response.data)
-      console.log(error)
+      setError(error.response.data);
+      console.log(error);
     }
-  }
+  };
   return (
     <div className="login_wrapper">
       <div className="inputs_feild_container">
@@ -46,7 +49,7 @@ const Login = () => {
                   name="email"
                   id="email"
                   placeholder="Your Email"
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -57,7 +60,7 @@ const Login = () => {
                   name="password"
                   id="password"
                   placeholder="Your Password"
-                  onChange={(e)=>setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </fieldset>

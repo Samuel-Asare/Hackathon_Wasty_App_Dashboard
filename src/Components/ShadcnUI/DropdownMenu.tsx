@@ -21,19 +21,15 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import { Link, useNavigate } from "react-router-dom";
 
-const handleLogout=()=>{
-  localStorage.setItem("user", JSON.stringify("null"));
-
-}
-
 export function DropdownMenuComponent() {
-  const user=JSON.parse(localStorage.getItem("user"))
-  const navigate=useNavigate()
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const navigate = useNavigate();
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     localStorage.setItem("user", JSON.stringify("null"));
-    navigate("/login")
-  }
+    navigate("/login");
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -78,17 +74,16 @@ export function DropdownMenuComponent() {
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
-        {user ?
-        <DropdownMenuItem>
-          <LogOut className="mr-2 h-4 w-4" />
-          <span onClick={handleLogout}>Logout</span>
-        </DropdownMenuItem>
-        :(
+        {user ? (
+          <DropdownMenuItem>
+            <LogOut className="mr-2 h-4 w-4" />
+            <span onClick={handleLogout}>Logout</span>
+          </DropdownMenuItem>
+        ) : (
           <Link to={"/login"}>
-          <span>Log In</span>
-        </Link>
-        )
-        }
+            <span>Log In</span>
+          </Link>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

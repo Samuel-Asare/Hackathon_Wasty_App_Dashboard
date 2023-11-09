@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh !important;
-  padding-top: 2.5rem !important;
+
   width: 100%;
   .inputs_feild_container {
     background-color: rgba(51, 105, 153, 0.046);
@@ -30,6 +30,10 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+
+      @include mobile_screen {
+        width: 80%;
+      }
 
       .btn {
         width: 100%;
