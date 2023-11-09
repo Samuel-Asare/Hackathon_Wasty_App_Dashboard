@@ -19,9 +19,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+const handleLogout=()=>{
+  localStorage.setItem("user", JSON.stringify("null"));
+
+}
 
 export function DropdownMenuComponent() {
+  const user=JSON.parse(localStorage.getItem("user"))
+  const navigate=useNavigate()
+
+  const handleLogout=()=>{
+    localStorage.setItem("user", JSON.stringify("null"));
+    navigate("/login")
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -66,15 +78,17 @@ export function DropdownMenuComponent() {
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
+        {user ?
         <DropdownMenuItem>
           <LogOut className="mr-2 h-4 w-4" />
-          {/* IF LOGGED IN CONDITION............. */}
-
-          <Link to={"/login"}>
-            <span>Log In</span>
-          </Link>
-          {/* END CONDITION... */}
+          <span onClick={handleLogout}>Logout</span>
         </DropdownMenuItem>
+        :(
+          <Link to={"/login"}>
+          <span>Log In</span>
+        </Link>
+        )
+        }
       </DropdownMenuContent>
     </DropdownMenu>
   );
