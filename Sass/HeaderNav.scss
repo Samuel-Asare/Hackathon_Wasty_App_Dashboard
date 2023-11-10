@@ -33,6 +33,7 @@
   .left-side {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     column-gap: 1rem;
 
     .circle_ball {
@@ -69,5 +70,5 @@
 }
 
 .anime_notification {
-  width: 12%;
+  width: 15%;
 }

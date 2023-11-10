@@ -84,7 +84,6 @@ const RequestTable: React.FC = () => {
           },
         }
       );
-      setData(data.filter((item) => item._id !== id));
     } catch (error) {
       console.log(error);
     }
