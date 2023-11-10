@@ -6,7 +6,8 @@ import { DropdownMenuComponent } from "./ShadcnUI/DropdownMenu";
 import Logo from "../assets/HeaderNav/recycle.svg";
 import { useEffect } from "react";
 
-// import { DataContext } from "../Context/ FirestoreDataContext";
+import notification_anime from "../JSON/Notification_Animation.json";
+import Lottie from "lottie-react";
 
 const HeaderNav = () => {
   useEffect(() => {
@@ -39,6 +40,10 @@ const HeaderNav = () => {
           <h3>Wasty.</h3>
         </Link>
         <div className="left-side">
+          <Lottie
+            animationData={notification_anime}
+            className="anime_notification"
+          />
           <div className="circle_ball"></div>
           <DropdownMenuComponent />
           <ModeToggle />

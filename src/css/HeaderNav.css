@@ -33,8 +33,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  animation: bounce 20s infinite;
-  display: none;
+  animation: bounce 10s infinite;
 }
 .header_wrapper .left-side .notification_span {
   position: relative;
@@ -53,4 +52,7 @@
   60% {
     transform: translateY(-10px);
   }
+}
+.anime_notification {
+  width: 12%;
 }
