@@ -34,11 +34,6 @@ const Login = () => {
       <div className="inputs_feild_container">
         <h5 className="headerLine_text">Access your account</h5>
         <div className="inputs_content">
-          <div className="btn">
-            <button className="google">SVG Login up with Google</button>
-          </div>
-
-          <p className="divider_or">Or</p>
 
           <form onSubmit={handleLogin}>
             <fieldset className="form_fieldset">
